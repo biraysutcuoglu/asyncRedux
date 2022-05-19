@@ -9,7 +9,7 @@ const ProductItem = (props) => {
 
   const addToCartHandler = () => {
     //do all heavy work on cart-slice
-    dispatch(cartActions.addToCartHandler({
+    dispatch(cartActions.addToCart({
       id,
       title,
       price
