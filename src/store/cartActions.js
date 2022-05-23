@@ -56,7 +56,12 @@ export const fetchCartData = () => {
         throw new Error("Fetching cart data failed.");
       }
       const data = await response.json();
-      dispatch(cartActions.replaceCart(data));
+      dispatch(
+        cartActions.replaceCart({
+          items: data.items || [],
+          itemCounter: data.itemCounter,
+        })
+      );
       return data;
     };
     try {

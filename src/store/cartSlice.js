@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialCartState = { items: [], itemCounter: 0 };
+const initialCartState = { items: [], itemCounter: 0, changed: false };
 const cartSlice = createSlice({
   name: "cart",
   initialState: initialCartState,
@@ -13,6 +13,7 @@ const cartSlice = createSlice({
       const newitem = action.payload;
       const existingItem = state.items.find((item) => item.id === newitem.id);
       state.itemCounter++;
+      state.changed = true;
       if (!existingItem) {
         state.items.push({
           id: newitem.id,
@@ -30,6 +31,7 @@ const cartSlice = createSlice({
       const removedId = action.payload; //payload is the id
       const removedItem = state.items.find((item) => item.id === removedId);
       state.itemCounter--;
+      state.changed = true;
       if (removedItem.quantity === 1) {
         state.items = state.items.filter((item) => item.id !== removedId); //overrides the items array
       } else {
